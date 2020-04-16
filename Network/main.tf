@@ -10,3 +10,10 @@ resource "google_compute_network" "kubernetes-the-hard-way" {
   name                    = "kubernetes-the-hard-way"
   auto_create_subnetworks = false
 }
+
+resource "google_compute_address" "kubernetes-the-hard-way" {
+  name = "kubernetes-the-hard-way"
+address_type="EXTERNAL"
+region="us-west1"
+network_tier="STANDARD"
+}
