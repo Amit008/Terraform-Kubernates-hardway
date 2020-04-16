@@ -20,8 +20,9 @@ resource "google_compute_instance" "default" {
 
   network_interface {
     count=3
-    network = "default"
+    subnetwork="kubernetes"
     network_ip=private-network-ip 10.240.0.1${count.index}
+    network_tier="STANDARD"
 
     access_config {
       // Ephemeral IP
