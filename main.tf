@@ -1,15 +1,15 @@
 module "Setup Network and Reserve External Static IP" {
-  source = "../Network"
+  source = "./Network"
 
 }
 
 module "Create firewall" {
-  source = "../firewall"
+  source = "./firewall"
 
 }
 
 module "Create Compute Instances" {
-  source = "../compute"
+  source = "./compute"
 
 }
 
