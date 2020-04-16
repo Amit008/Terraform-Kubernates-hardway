@@ -1,5 +1,5 @@
 ###Create firewall rules:
-resource "google_compute_firewall" "default" {
+resource "google_compute_firewall" "kubernetes-the-hard-way-allow-internal" {
   name    = "kubernetes-the-hard-way-allow-internal"
   network = "kubernetes-the-hard-way"
 
@@ -19,7 +19,7 @@ resource "google_compute_firewall" "default" {
 }
 
 ###Create firewall rules
-resource "google_compute_firewall" "default" {
+resource "google_compute_firewall" "kubernetes-the-hard-way-allow-external" {
   name    = "kubernetes-the-hard-way-allow-external"
   network = "kubernetes-the-hard-way"
 
