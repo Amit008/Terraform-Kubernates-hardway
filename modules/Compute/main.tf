@@ -45,7 +45,7 @@ resource "google_compute_instance" "Compute-group-1" {
   can_ip_forward   = false
   zone         = "europe-west4-a"
 
-  metadata {
+  metadata={
     pod-cidr = "10.200.${count.index}.0/24"
     }
   
