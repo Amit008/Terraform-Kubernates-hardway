@@ -17,10 +17,8 @@ resource "google_compute_instance" "Compute-group-0" {
 
 
   network_interface {
-    count=3
     subnetwork="kubernetes"
     network_ip="10.240.0.1${count.index}"
-    network_tier="STANDARD"
 
   }
   
@@ -49,10 +47,8 @@ resource "google_compute_instance" "Compute-group-1" {
 
 
   network_interface {
-    count=3
     subnetwork="kubernetes"
     network_ip="10.240.0.2${count.index}"
-    network_tier="STANDARD"
 
   }
   
