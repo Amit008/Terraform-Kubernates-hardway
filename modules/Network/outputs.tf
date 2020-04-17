@@ -4,5 +4,5 @@ output "Network_Name" {
 }
 
 output "SubNetNetwork_Name" {
-  value = "${google_compute_network.kubernetes.name}"
+  value = "${google_compute_subnetwork.kubernetes.name}"
 }
