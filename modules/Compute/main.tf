@@ -5,7 +5,7 @@ resource "google_compute_instance" "Compute-group-0" {
   machine_type = "n1-standard-1"
   can_ip_forward   = false
   zone         = "europe-west4-a"
-
+ 
   tags = ["kubernetes-the-hard-way","controller"]
 
   boot_disk {
@@ -23,15 +23,11 @@ resource "google_compute_instance" "Compute-group-0" {
 
   }
   
-  metadata {
-    pod-cidr = "10.200.${count.index}.0/24"
-  }
   
   service_account {
     scopes = ["compute-rw","storage-ro","service-management","service-control","logging-write","monitoring"]
   }
 }
-
 
 
 resource "google_compute_instance" "Compute-group-1" {
@@ -41,6 +37,10 @@ resource "google_compute_instance" "Compute-group-1" {
   can_ip_forward   = false
   zone         = "europe-west4-a"
 
+  metadata {
+    pod-cidr = "10.200.${count.index}.0/24"
+    }
+  
   tags = ["kubernetes-the-hard-way","controller"]
 
   boot_disk {
