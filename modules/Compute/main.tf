@@ -23,6 +23,10 @@ resource "google_compute_instance" "Compute-group-0" {
 
   }
   
+  metadata {
+    pod-cidr = "10.200.${count.index}.0/24"
+  }
+  
   service_account {
     scopes = ["compute-rw","storage-ro","service-management","service-control","logging-write","monitoring"]
   }
