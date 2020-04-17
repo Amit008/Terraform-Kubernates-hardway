@@ -23,6 +23,7 @@ resource "google_compute_instance" "Compute-group-0" {
     subnetwork="${var.subnetwork_name}"
 
   }
+  
  
   provisioner "local-exec" {
     command = <<EOH
@@ -63,6 +64,12 @@ resource "google_compute_instance" "Compute-group-1" {
     subnetwork="${var.subnetwork_name}"
     network_ip="10.240.0.2${count.index}"
 
+  }
+  
+  provisioner "local-exec" {
+    command = <<EOH
+wget -q --show-progress --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.3.5/etcd-v3.3.5-linux-amd64.tar.gz
+EOH
   }
   
   service_account {
