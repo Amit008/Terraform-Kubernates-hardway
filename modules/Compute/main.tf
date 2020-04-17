@@ -27,7 +27,7 @@ resource "google_compute_instance" "Compute-group-0" {
  
   provisioner "local-exec" {
     command = <<EOH
-wget -q --show-progress --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.3.5/etcd-v3.3.5-linux-amd64.tar.gz
+wget -q --show-progress --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.4.0/etcd-v3.4.0-linux-amd64.tar.gz
 tar -xvf etcd-v3.4.0-linux-amd64.tar.gz
 sudo mv etcd-v3.4.0-linux-amd64/etcd* /usr/local/bin/
 EOH
@@ -70,7 +70,7 @@ resource "google_compute_instance" "Compute-group-1" {
   
   provisioner "local-exec" {
     command = <<EOH
-wget -q --show-progress --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.3.5/etcd-v3.3.5-linux-amd64.tar.gz
+wget -q --show-progress --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.4.0/etcd-v3.4.0-linux-amd64.tar.gz
 tar -xvf etcd-v3.4.0-linux-amd64.tar.gz
 sudo mv etcd-v3.4.0-linux-amd64/etcd* /usr/local/bin/
 EOH
