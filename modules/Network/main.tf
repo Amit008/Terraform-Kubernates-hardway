@@ -1,7 +1,7 @@
 resource "google_compute_subnetwork" "kubernetes" {
   name          = "kubernetes"
   ip_cidr_range = "10.2.0.0/16"
-  region        = "us-west1"
+  region        = "europe-west4-a"
   network       = google_compute_network.kubernetes-the-hard-way.self_link
   
 }
@@ -14,6 +14,6 @@ resource "google_compute_network" "kubernetes-the-hard-way" {
 resource "google_compute_address" "kubernetes-the-hard-way" {
   name = "kubernetes-the-hard-way"
 address_type="EXTERNAL"
-region="us-west1"
+region="europe-west4-a"
 network_tier="STANDARD"
 }
