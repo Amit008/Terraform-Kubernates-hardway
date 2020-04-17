@@ -1,8 +1,8 @@
 
-output "network_id" {
-  value = "${google_compute_network.kubernetes-the-hard-way.id}"
+output "Network_Name" {
+  value = "${google_compute_network.kubernetes-the-hard-way.name}"
 }
 
-output "subnet_id" {
-  value = "${google_compute_network.kubernetes.id}"
+output "SubnetNetwork_Name" {
+  value = "${google_compute_network.kubernetes.name}"
 }
