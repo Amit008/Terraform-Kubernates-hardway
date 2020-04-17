@@ -1,7 +1,7 @@
 ###Create firewall rules:
 resource "google_compute_firewall" "kubernetes-the-hard-way-allow-internal" {
   name    = "kubernetes-the-hard-way-allow-internal"
-  network = "kubernetes-the-hard-way"
+  network = "${var.network_name}"
 
   allow {
     protocol = "tcp"
@@ -21,7 +21,7 @@ resource "google_compute_firewall" "kubernetes-the-hard-way-allow-internal" {
 ###Create firewall rules
 resource "google_compute_firewall" "kubernetes-the-hard-way-allow-external" {
   name    = "kubernetes-the-hard-way-allow-external"
-  network = "kubernetes-the-hard-way"
+  network = "${var.network_name}"
 
   allow {
     protocol = "icmp"
