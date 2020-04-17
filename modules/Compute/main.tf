@@ -4,7 +4,7 @@ resource "google_compute_instance" "Compute-group-0" {
   name         = "controller-${count.index}"
   machine_type = "n1-standard-1"
   can_ip_forward   = false
-  zone         = "us-west1-c"
+  zone         = "europe-west4-a"
 
   tags = ["kubernetes-the-hard-way","controller"]
 
@@ -34,7 +34,7 @@ resource "google_compute_instance" "Compute-group-1" {
   name         = "worker-${count.index}"
   machine_type = "n1-standard-1"
   can_ip_forward   = false
-  zone         = "us-west1-c"
+  zone         = "europe-west4-a"
 
   tags = ["kubernetes-the-hard-way","controller"]
 
