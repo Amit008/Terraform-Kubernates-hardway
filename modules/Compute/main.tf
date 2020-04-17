@@ -17,7 +17,7 @@ resource "google_compute_instance" "Compute-group-0" {
 
 
   network_interface {
-    network="${var.subnetwork_name}"
+    subnet="${var.subnetwork_name}"
     network_ip="10.240.0.1${count.index}"
 
   }
@@ -47,7 +47,7 @@ resource "google_compute_instance" "Compute-group-1" {
 
 
   network_interface {
-    network="${subnetwork_name}"
+    subnet="${subnetwork_name}"
     network_ip="10.240.0.2${count.index}"
 
   }
