@@ -15,7 +15,7 @@ resource "google_compute_firewall" "kubernetes-the-hard-way-allow-internal" {
     protocol = "icmp"
   }
 
-  source-ranges ["10.240.0.0/24","10.200.0.0/16"]
+  source_ranges = ["10.240.0.0/24","10.200.0.0/16"]
 }
 
 ###Create firewall rules
