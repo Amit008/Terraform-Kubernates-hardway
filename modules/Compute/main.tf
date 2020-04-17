@@ -1,5 +1,5 @@
 
-resource "google_compute_instance" "default" {
+resource "google_compute_instance" "Compute-group-0" {
   count=3
   name         = "controller-${count.index}"
   machine_type = "n1-standard-1"
@@ -31,7 +31,7 @@ resource "google_compute_instance" "default" {
 
 
 
-resource "google_compute_instance" "default" {
+resource "google_compute_instance" "Compute-group-1" {
   count=3
   name         = "worker-${count.index}"
   machine_type = "n1-standard-1"
