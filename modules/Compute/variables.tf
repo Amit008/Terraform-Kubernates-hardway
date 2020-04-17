@@ -1,3 +1,3 @@
-variable subnetwork_name{
+variable "subnetwork_name" {
 
 }
