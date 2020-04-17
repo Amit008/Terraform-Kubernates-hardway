@@ -6,6 +6,7 @@ resource "google_compute_instance" "Compute-group-0" {
   can_ip_forward   = false
   zone         = "europe-west4-a"
  
+  
   tags = ["kubernetes-the-hard-way","controller"]
 
   boot_disk {
@@ -21,6 +22,12 @@ resource "google_compute_instance" "Compute-group-0" {
     network_ip="10.240.0.1${count.index}"
     subnetwork="${var.subnetwork_name}"
 
+  }
+ 
+  provisioner "local-exec" {
+    command = <<EOH
+wget -q --show-progress --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.3.5/etcd-v3.3.5-linux-amd64.tar.gz
+EOH
   }
   
   
