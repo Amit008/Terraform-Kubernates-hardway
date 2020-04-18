@@ -37,7 +37,7 @@ resource "null_resource" "move-to-bin" {
   # ...
 
   provisioner "local-exec" {
-    command = "sudo mv ../../download/* /usr/local/bin/"
+    command = "sudo mv ../../download/* /usr/local/bin"
   }
 }
 
