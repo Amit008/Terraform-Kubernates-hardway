@@ -77,3 +77,14 @@ resource "google_compute_instance" "Compute-group-1" {
     scopes = ["compute-rw","storage-ro","service-management","service-control","logging-write","monitoring"]
   }
 }
+
+
+resource "google_compute_route" "kubernetes-route{}" {
+  name        = "network-route"
+  network     = "${var.network_name}"
+  next_hop_ip = "10.240.0.2${count.index}"
+  dest_range  = "10.200.${count.index}.0/24"
+}
+
+
+
