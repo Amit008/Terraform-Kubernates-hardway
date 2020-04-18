@@ -1,5 +1,5 @@
 
-resource "Install PKI cfssl" "Install-cfssl" {
+resource "Install_PKI_cfssl" "Install-cfssl" {
   # ...
 
   provisioner "local-exec" {
@@ -9,7 +9,7 @@ resource "Install PKI cfssl" "Install-cfssl" {
   }
 }
 
-resource "grant permission" "Grant-permission-cfssl" {
+resource "grant_permission" "Grant-permission-cfssl" {
   # ...
 
   provisioner "local-exec" {
