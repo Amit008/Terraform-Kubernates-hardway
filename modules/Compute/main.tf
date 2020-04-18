@@ -25,35 +25,7 @@ resource "google_compute_instance" "Compute-group-0" {
   }
   
  
-  provisioner "local-exec" {
-    command = <<EOH
-wget -q --show-progress --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.4.0/etcd-v3.4.0-linux-amd64.tar.gz
-tar -xvf etcd-v3.4.0-linux-amd64.tar.gz
-sudo mv etcd-v3.4.0-linux-amd64/etcd* /usr/local/bin/
- sudo mkdir -p /etc/etcd /var/lib/etcd
- cp ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/
-INTERNAL_IP=$(curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip)
-ETCD_NAME=$(hostname -s)
-wget -q --show-progress --https-only --timestamping https://github.com/Amit008/Terraform-Kubernates-hardway/blob/master/SystemServices/etcd.service
-sudo mv etcd.service /etc/systemd/system/
-
-sudo systemctl daemon-reload
-sudo systemctl enable etcd
-sudo systemctl start etcd
-
-wget -q --show-progress --https-only --timestamping \
-  "https://storage.googleapis.com/kubernetes-release/release/v1.15.3/bin/linux/amd64/kube-apiserver" \
-  "https://storage.googleapis.com/kubernetes-release/release/v1.15.3/bin/linux/amd64/kube-controller-manager" \
-  "https://storage.googleapis.com/kubernetes-release/release/v1.15.3/bin/linux/amd64/kube-scheduler" \
-  "https://storage.googleapis.com/kubernetes-release/release/v1.15.3/bin/linux/amd64/kubectl"
-
-sudo chmod +x kube-apiserver kube-controller-manager kube-scheduler kubectl
-sudo mv kube-apiserver kube-controller-manager kube-scheduler kubectl /usr/local/bin/
-
-mkdir -p /var/lib/kubernetes/
-
-EOH
-  }
+  
   
   
   service_account {
@@ -90,18 +62,18 @@ resource "google_compute_instance" "Compute-group-1" {
 
   }
   
-  provisioner "local-exec" {
-    command = <<EOH
-wget -q --show-progress --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.4.0/etcd-v3.4.0-linux-amd64.tar.gz
-tar -xvf etcd-v3.4.0-linux-amd64.tar.gz
-sudo mv etcd-v3.4.0-linux-amd64/etcd* /usr/local/bin/
-
-
-
-EOH
+ provisioner "file" {
+    source      = "../SystemServices/"
+    destination = "/etc/systemd/system/"
   }
   
+
+  
   service_account {
+  
+    
+    
+    
     scopes = ["compute-rw","storage-ro","service-management","service-control","logging-write","monitoring"]
   }
 }
