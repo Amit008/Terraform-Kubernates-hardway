@@ -11,7 +11,7 @@ resource "null_resource" "download-cfssl" {
   # ...
 
   provisioner "local-exec" {
-    command = "wget -q --show-progress --https-only --timestamping https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/linux/cfssl -O ../../download/cfssl"
+    command = "sudo curl -s -L -o ~/bin/cfssl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64"
   }
 }
 
@@ -19,7 +19,7 @@ resource "null_resource" "download-cfssljson" {
   # ...
 
   provisioner "local-exec" {
-    command = "wget -q --show-progress --https-only --timestamping https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/linux/cfssljson -O ../../download/cfssljson"
+    command = "sudo curl -s -L -o ~/bin/cfssljson https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64"
   }
 }
 
@@ -28,16 +28,16 @@ resource "null_resource" "grant-permission-cfssl" {
   # ...
 
   provisioner "local-exec" {
-    command = "sudo chmod +x ../../download/*"
+    command = "sudo chmod +x ~/bin/{cfssl,cfssljson}"
   }
 }
 
 
-resource "null_resource" "move-to-bin" {
+resource "null_resource" "setpath" {
   # ...
 
   provisioner "local-exec" {
-    command = "sudo mv ../../download/* /usr/local/bin"
+    command = "export PATH=$PATH:~/bin"
   }
 }
 
