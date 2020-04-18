@@ -37,6 +37,16 @@ resource "google_compute_firewall" "kubernetes-the-hard-way-allow-external" {
 
 
 
+
+
+resource "google_compute_http_health_check" "kubernetes" {
+  name         = "authentication-health-check"
+  host         = "kubernetes.default.svc.cluster.local" 
+  request_path = "/healthz"  
+}
+
+
+
 resource "google_compute_firewall" "kube allow-health-check"
 {
    name="kubernetes-the-hard-way-allow-health-check"
@@ -63,17 +73,3 @@ resource "google_compute_forwarding_rule" "kubeforwarding-rule" {
   target                = google_compute_target_pool.ktPool.self_link
   subnetwork            = "${google_compute_subnetwork.default.name}"
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
