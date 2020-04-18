@@ -1,5 +1,5 @@
 
-resource "google_compute_instance" "k8s_controller" {
+resource "google_compute_instance" "k8" {
   # ...
 
   provisioner "local-exec" {
@@ -7,7 +7,7 @@ resource "google_compute_instance" "k8s_controller" {
   }
 }
 
-resource "google_compute_instance" "k8s_controller" {
+resource "google_compute_instance" "k81" {
   # ...
 
   provisioner "local-exec" {
@@ -16,7 +16,7 @@ resource "google_compute_instance" "k8s_controller" {
 }
 
 
-resource "google_compute_instance" "k8s_controller" {
+resource "google_compute_instance" "k" {
   # ...
 
   provisioner "local-exec" {
