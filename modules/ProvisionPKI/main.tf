@@ -1,5 +1,5 @@
 
-resource "null_resource" "k8" {
+resource "null_resource" "download-cfssl" {
   # ...
 
   provisioner "local-exec" {
@@ -7,7 +7,7 @@ resource "null_resource" "k8" {
   }
 }
 
-resource "null_resource" "k81" {
+resource "null_resource" "grant-permission-cfssl" {
   # ...
 
   provisioner "local-exec" {
@@ -16,7 +16,7 @@ resource "null_resource" "k81" {
 }
 
 
-resource "null_resource" "k" {
+resource "null_resource" "move-to-bin" {
   # ...
 
   provisioner "local-exec" {
