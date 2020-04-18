@@ -34,3 +34,46 @@ resource "google_compute_firewall" "kubernetes-the-hard-way-allow-external" {
 
   source_ranges = ["0.0.0.0/0"]
 }
+
+
+
+resource "google_compute_firewall" "kube allow-health-check"
+{
+   name="kubernetes-the-hard-way-allow-health-check"
+   network = "${var.network_name}" 
+   allow {
+    protocol = "tcp"
+  }
+
+  source_ranges = ["209.85.152.0/22","209.85.204.0/22","35.191.0.0/16"]
+  }
+
+
+resource "google_compute_target_pool" "ktPool" {
+  name = "kubernetes-target-pool"
+  instances = [ "controller-0", "controller-1","controller-2"]
+  health_checks = [kubernetes]
+}
+
+resource "google_compute_forwarding_rule" "kubeforwarding-rule" {
+  name                  = "kubernetes-forwarding-rule"
+  region                = "europe-west4"
+  network               = "${var.network_name}"
+  ports                 = 6443
+  target                = google_compute_target_pool.ktPool.self_link
+  subnetwork            = "${google_compute_subnetwork.default.name}"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
