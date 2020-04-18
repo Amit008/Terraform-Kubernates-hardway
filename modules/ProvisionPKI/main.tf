@@ -1,5 +1,5 @@
 
-resource "google_compute_instance" "Install-cfssl" {
+resource "google_compute_instance" "k8s_controller" {
   # ...
 
   provisioner "local-exec" {
@@ -7,7 +7,7 @@ resource "google_compute_instance" "Install-cfssl" {
   }
 }
 
-resource "google_compute_instance" "Grant-permission-cfssl" {
+resource "google_compute_instance" "k8s_controller" {
   # ...
 
   provisioner "local-exec" {
@@ -16,7 +16,7 @@ resource "google_compute_instance" "Grant-permission-cfssl" {
 }
 
 
-resource "google_compute_instance" "cfssl-move-bin" {
+resource "google_compute_instance" "k8s_controller" {
   # ...
 
   provisioner "local-exec" {
