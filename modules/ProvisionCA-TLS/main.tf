@@ -17,7 +17,7 @@ resource "null_resource" "Client-certificates" {
 }
 
 
-resource "null_resource" "CM certificates" {
+resource "null_resource" "CM-certificates" {
   # ...
 
   provisioner "local-exec" {
@@ -44,7 +44,7 @@ resource "null_resource" "Schedule-certificate" {
 
 
 
-resource "null_resource" "Service Account-Certificate" {
+resource "null_resource" "Service-Account-Certificate" {
   # ...
 
   provisioner "local-exec" {
