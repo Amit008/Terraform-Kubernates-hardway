@@ -3,9 +3,7 @@ resource "Install_PKI_cfssl" "Install-cfssl" {
   # ...
 
   provisioner "local-exec" {
-    command = "wget -q --show-progress --https-only --timestamping \
-  https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/linux/cfssl -O /opt/download  \
-  https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/linux/cfssljson -O /opt/download"
+    command = "wget -q --show-progress --https-only --timestamping https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/linux/cfssl -O /opt/download https://storage.googleapis.com/kubernetes-the-hard-way/cfssl/linux/cfssljson -O /opt/download"
   }
 }
 
