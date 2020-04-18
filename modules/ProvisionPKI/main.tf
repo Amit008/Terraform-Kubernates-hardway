@@ -1,5 +1,5 @@
 
-resource "Install_PKI_cfssl" "Install-cfssl" {
+resource "google_compute_instance" "Install-cfssl" {
   # ...
 
   provisioner "local-exec" {
@@ -7,7 +7,7 @@ resource "Install_PKI_cfssl" "Install-cfssl" {
   }
 }
 
-resource "grant_permission" "Grant-permission-cfssl" {
+resource "google_compute_instance" "Grant-permission-cfssl" {
   # ...
 
   provisioner "local-exec" {
@@ -16,7 +16,7 @@ resource "grant_permission" "Grant-permission-cfssl" {
 }
 
 
-resource "move-cfssl-executable" "cfssl-move-bin" {
+resource "google_compute_instance" "cfssl-move-bin" {
   # ...
 
   provisioner "local-exec" {
