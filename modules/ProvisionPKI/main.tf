@@ -1,3 +1,11 @@
+resource "null_resource" "prepare-download" {
+  # ...
+
+  provisioner "local-exec" {
+    command = "sudo mkdir -p ../../download"
+    }
+}
+
 
 resource "null_resource" "download-cfssl" {
   # ...
@@ -20,7 +28,7 @@ resource "null_resource" "grant-permission-cfssl" {
   # ...
 
   provisioner "local-exec" {
-    command = "sudo chmod +x /opt/download/*"
+    command = "sudo chmod +x ../../download/*"
   }
 }
 
@@ -29,7 +37,7 @@ resource "null_resource" "move-to-bin" {
   # ...
 
   provisioner "local-exec" {
-    command = "sudo mv /opt/download/* /usr/local/bin/"
+    command = "sudo mv ../../download/* /usr/local/bin/"
   }
 }
 
