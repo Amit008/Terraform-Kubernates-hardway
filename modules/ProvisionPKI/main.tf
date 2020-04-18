@@ -20,7 +20,7 @@ resource "null_resource" "grant-permission-cfssl" {
   # ...
 
   provisioner "local-exec" {
-    command = "sudo chmod +x /opt/download/cfssl /opt/download/cfssljson"
+    command = "sudo chmod +x /opt/download/*"
   }
 }
 
@@ -29,7 +29,7 @@ resource "null_resource" "move-to-bin" {
   # ...
 
   provisioner "local-exec" {
-    command = "sudo chmod +x sudo mv /opt/download/cfssl /opt/download/cfssljson /usr/local/bin/"
+    command = "sudo mv /opt/download/* /usr/local/bin/"
   }
 }
 
