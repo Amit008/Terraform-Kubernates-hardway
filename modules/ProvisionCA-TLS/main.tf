@@ -54,15 +54,14 @@ resource "null_resource" "Generate-Service-account" {
 }
 
 
-#resource "null_resource" "Generate-Kubelet-Client-Certificates" {
+resource "null_resource" "Generate-Kubelet-Client-Certificates" {
   # ...
-#  count=3
-# depends_on       = ["null_resource.Generate-CA"]
-#  provisioner "local-exec" {
-#  command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -hostname=worker-${count.index},${EXTERNAL_IP},${INTERNAL_IP} -profile=kubernetes worker-${count.index}-csr.json | cfssljson -bare ../../Certificate/worker-${count.index}"
-# }
-#}
-
+  count=3
+ depends_on       = ["null_resource.Generate-CA"]
+  provisioner "local-exec" {
+  command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -hostname=worker-${count.index},element([$var.external_ip],${count.index}),element([$var.internal_ip],${count.index}) -profile=kubernetes worker-${count.index}-csr.json | cfssljson -bare ../../Certificate/worker-${count.index}"
+ }
+}
 
 resource "null_resource" "API-Server-Certificate" {
   # ...
