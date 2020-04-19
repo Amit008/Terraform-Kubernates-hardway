@@ -3,6 +3,7 @@ resource "null_resource" "download-cfssl" {
 
   provisioner "local-exec" {
     command = "sudo curl -s -L -o /usr/local/bin/cfssl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64"
+    interpreter = ["/bin/bash", "-c"]
   }
 }
 
