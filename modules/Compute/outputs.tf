@@ -1,7 +1,12 @@
-output "External_IP" {
-  value = "${google_compute_instances.default.network_interface.0.access_config.0.nat_ip}"
+output "public_ip" {
+  value = "${google_compute_address.kubernetes-the-hard-way.address}"
 }
 
-output "Internal_IP" {
-  value = "${google_compute_instances.default.default.network_interface.0.networkIP}"
+
+output "Internal_ips" {
+  value = "${join(" ", google_compute_instance.compute.*.network_interface.0.access_config.0.assigned_nat_ip)}"
+}
+
+output "External_ips" {
+  value = "${join(" ", google_compute_instance.compute.*.network_interface.0.network_ip)}"
 }
