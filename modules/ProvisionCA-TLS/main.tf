@@ -23,7 +23,7 @@ resource "null_resource" "Install-cfssl" {
 
 
 resource "null_resource" "Grant-permission-script" {
-  depends_on = ["module.db.id"] 
+  depends_on = ["null_resource.Install-cfssl"] 
   provisioner "local-exec" {
     command = "sudo chmod 775 /usr/local/bin/cfssl*"
   }
