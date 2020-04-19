@@ -25,9 +25,8 @@ resource "null_resource" "Install-cfssl" {
 
 
 resource "null_resource" "Grant-permission-script" {
-  # ...
-
-#  provisioner "local-exec" {
-#    command = "sudo chmod 775 /usr/local/bin/cfssl*"
-#  }
-#}
+  
+  provisioner "local-exec" {
+    command = "sudo chmod 775 /usr/local/bin/cfssl*"
+  }
+}
