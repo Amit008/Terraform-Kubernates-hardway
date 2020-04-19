@@ -22,12 +22,12 @@ resource "google_compute_instance" "Compute-group-0" {
     network_ip="10.240.0.1${count.index}"
     subnetwork="${var.subnetwork_name}"
 
-  }
+  
   
  access_config {
       // Ephemeral IP
     }
-  
+    } 
   
   
   service_account {
@@ -62,10 +62,10 @@ resource "google_compute_instance" "Compute-group-1" {
     subnetwork="${var.subnetwork_name}"
     network_ip="10.240.0.2${count.index}"
 
-  }
   
   access_config {
       // Ephemeral IP
+    }
     }
   
  provisioner "file" {
