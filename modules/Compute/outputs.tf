@@ -1,5 +1,5 @@
 output "public_ip" {
-  value = "${google_compute_address.kubernetes-the-hard-way.address}"
+  value = "${module.SetupComputeInstances.kubernetes-the-hard-way.address}"
 }
 
 
