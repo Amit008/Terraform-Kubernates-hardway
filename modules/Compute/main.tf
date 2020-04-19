@@ -24,7 +24,9 @@ resource "google_compute_instance" "Compute-group-0" {
 
   }
   
- 
+ access_config {
+      // Ephemeral IP
+    }
   
   
   
@@ -61,6 +63,10 @@ resource "google_compute_instance" "Compute-group-1" {
     network_ip="10.240.0.2${count.index}"
 
   }
+  
+  access_config {
+      // Ephemeral IP
+    }
   
  provisioner "file" {
     source      = "../SystemServices/"
