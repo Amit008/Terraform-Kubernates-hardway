@@ -3,10 +3,10 @@ output "public_ip" {
 }
 
 
-output "Internal_ips" {
+output "External_ips" {
   value = "${join(" ", google_compute_instance.compute.*.network_interface.0.access_config.0.assigned_nat_ip)}"
 }
 
-output "External_ips" {
+output "Internal_ips" {
   value = "${join(" ", google_compute_instance.compute.*.network_interface.0.network_ip)}"
 }
