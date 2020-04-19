@@ -85,12 +85,12 @@ resource "google_compute_instance" "Compute-group-1" {
 }
 
 
-resource "google_compute_route" "kubernetes-route{}" {
-  name        = "network-route"
-  network     = "${var.network_name}"
-  next_hop_ip = "10.240.0.2${count.index}"
-  dest_range  = "10.200.${count.index}.0/24"
-}
+#resource "google_compute_route" "kubernetes-route{}" {
+#  name        = "network-route"
+#  network     = "${var.network_name}"
+#  next_hop_ip = "10.240.0.2${count.index}"
+#  dest_range  = "10.200.${count.index}.0/24"
+#}
 
 
 
