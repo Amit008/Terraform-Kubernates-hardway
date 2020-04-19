@@ -1,8 +1,8 @@
-resource "null_resource" "Grant-permission=script" {
+resource "null_resource" "Grant-permission-script" {
   # ...
 
   provisioner "local-exec" {
-    command = "chmod 775 ../../Scripts/CreateCertificates.sh"
+    command = "sudo chmod 775 ../../Scripts/CreateCertificates.sh"
   }
 }
 
