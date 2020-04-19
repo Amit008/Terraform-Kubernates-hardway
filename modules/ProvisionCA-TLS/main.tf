@@ -62,7 +62,3 @@ resource "null_resource" "Generate-Service-account" {
 #  command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -hostname=worker-${count.index},${EXTERNAL_IP},${INTERNAL_IP} -profile=kubernetes worker-${count.index}-csr.json | cfssljson -bare ../../Certificate/worker-${count.index}"
 # }
 #}
-
-
-
-
