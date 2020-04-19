@@ -1,15 +1,66 @@
-#resource "null_resource" "Grant-permission-script" {
+resource "null_resource" "Generate-CA" {
   # ...
 
-#  provisioner "local-exec" {
-#    command = "sudo chmod 775 ../../Scripts/CreateCertificates.sh"
-#  }
-#}
+  provisioner "local-exec" {
+    command = "cfssl gencert -initca ../../JasonFiles/ca-csr.json | cfssljson -bare ../../Certificate/ca"
+  }
+}
 
-#resource "null_resource" "CA-Resource" {
+resource "null_resource" "Generate-Admin-certificate" {
   # ...
 
-#  provisioner "local-exec" {
-#    command = "../../Scripts/CreateCertificates.sh"
-#  }
-#}
+  provisioner "local-exec" {
+    command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -profile=kubernetes ../../JasonFiles/admin-csr.json | cfssljson -bare ../../Certificate/admin
+"
+  }
+}
+
+
+resource "null_resource" "Generate-Kube-Controller" {
+  # ...
+
+  provisioner "local-exec" {
+    command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -profile=kubernetes ../../JasonFiles/admin-csr.json | cfssljson -bare ../../Certificate/admin"
+  }
+}
+
+
+resource "null_resource" "Generate-Kube-Proxy" {
+  # ...
+
+  provisioner "local-exec" {
+    command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -profile=kubernetes ../../JasonFiles/kube-proxy-csr.json | cfssljson -bare ../../Certificate/kube-proxy"
+
+ }
+}
+
+
+resource "null_resource" "Generate-Kube-Scheduler" {
+  # ...
+
+  provisioner "local-exec" {
+    command = "cfssl gencert -ca=../../Certificate/ca.pem  -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -profile=kubernetes ../../JasonFiles/kube-scheduler-csr.json | cfssljson -bare ../../Certificate/kube-scheduler"
+
+ }
+}
+
+
+resource "null_resource" "Generate-Service-account" {
+  # ...
+
+  provisioner "local-exec" {
+  command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -profile=kubernetes ../../JasonFiles/service-account-csr.json | cfssljson -bare ../../Certificate/service-account"
+
+ }
+}
+
+resource "null_resource" "Generate-API-Server-Certificate" {
+  # ...
+
+  provisioner "local-exec" {
+  command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -hostname=10.32.0.1,10.240.0.10,10.240.0.11,10.240.0.12,${KUBERNETES_PUBLIC_ADDRESS},127.0.0.1,${KUBERNETES_HOSTNAMES} -profile=kubernetes ../../JasonFiles/kubernetes-csr.json | cfssljson -bare ../../Certificate/kubernetes"
+ }
+}
+
+
+
