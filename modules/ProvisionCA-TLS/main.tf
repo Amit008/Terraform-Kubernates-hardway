@@ -60,7 +60,7 @@ resource "null_resource" "Generate-Kubelet-Client-csr" {
  count=3
  depends_on       = ["null_resource.Generate-CA"]
   provisioner "local-exec" {
-  command = "echo ${cat > ../../JasonFiles/worker-${count.index}-csr.json <<EOF { "CN": "system:node:${instance}", "key": { "algo": "rsa","size": 2048 }, "names": [  { "C": "US", "L": "Portland",  "O": "system:nodes", "OU": "Kubernetes The Hard Way","ST": "Oregon" } ]} EOF}"
+  command = "cat > ../../JasonFiles/worker-${count.index}-csr.json <<EOF { "CN": "system:node:${instance}", "key": { "algo": "rsa","size": 2048 }, "names": [  { "C": "US", "L": "Portland",  "O": "system:nodes", "OU": "Kubernetes The Hard Way","ST": "Oregon" } ]} EOF}"
   }
 }
 
