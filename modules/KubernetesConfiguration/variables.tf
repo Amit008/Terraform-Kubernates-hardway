@@ -1,1 +1,2 @@
-
+variable "KUBERNETES_PUBLIC_ADDRESS"{
+  }
