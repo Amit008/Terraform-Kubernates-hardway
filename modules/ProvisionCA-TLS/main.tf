@@ -54,12 +54,24 @@ resource "null_resource" "Generate-Service-account" {
 }
 
 
+
+resource "null_resource" "Generate-Kubelet-Client-csr" {
+  # ...
+ count=3
+ depends_on       = ["null_resource.Generate-CA"]
+  provisioner "local-exec" {
+  command = "echo ${cat > ../../JasonFiles/worker-${count.index}-csr.json <<EOF { "CN": "system:node:${instance}", "key": { "algo": "rsa","size": 2048 }, "names": [  { "C": "US", "L": "Portland",  "O": "system:nodes", "OU": "Kubernetes The Hard Way","ST": "Oregon" } ]} EOF}"
+  }
+}
+
+
+
 resource "null_resource" "Generate-Kubelet-Client-Certificates" {
   # ...
   count=3
  depends_on       = ["null_resource.Generate-CA"]
   provisioner "local-exec" {
-  command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -hostname=worker-${count.index} -profile=kubernetes worker-${count.index}-csr.json | cfssljson -bare ../../Certificate/worker-${count.index}"
+  command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -hostname=worker-${count.index} -profile=kubernetes ../../JasonFiles/worker-${count.index}-csr.json | cfssljson -bare ../../Certificate/worker-${count.index}"
  }
 }
 
