@@ -6,6 +6,7 @@ type    = "list"
 
 variable "internal_ip" {
 type    = "list"
+  default = ["0.0.0.0", "0.0.0.1", "0.0.0.2"]
 }
 
 
