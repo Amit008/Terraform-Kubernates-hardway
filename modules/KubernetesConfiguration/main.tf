@@ -11,7 +11,9 @@ resource "null_resource" "Configure-Cluster" {
 
 resource "null_resource" "Set-Credentials-Cluster" {
   # ...
-count=3
+depends_on       = ["Configure-Cluster"]
+  count=3
+  
 provisioner "local-exec" {
 command = "kubectl config set-credentials system:node:worker-${count.index} --client-certificate=../../Certificate/worker-${count.index}.pem --client-key=../../Certificate/worker-${count.index}-key.pem --embed-certs=true  --kubeconfig=../../KubernetesConfig/worker-${count.index}.kubeconfig"
   }
@@ -21,6 +23,7 @@ command = "kubectl config set-credentials system:node:worker-${count.index} --cl
 
 resource "null_resource" "Set-Context" {
   # ...
+  depends_on       = ["Configure-Cluster","Set-Credentials-Cluster"]
 count=3
 provisioner "local-exec" {
 command = " kubectl config set-context default --cluster=kubernetes-the-hard-way  --user=system:node:worker-${count.index}  --kubeconfig=../../KubernetesConfig/worker-${count.index}.kubeconfig"
@@ -31,6 +34,7 @@ command = " kubectl config set-context default --cluster=kubernetes-the-hard-way
 
 resource "null_resource" "Set-User-Context" {
   # ...
+  depends_on       = ["Configure-Cluster","Set-Credentials-Cluster","Set-Context"]
 count=3
   provisioner "local-exec" {
     command = " kubectl config use-context default --kubeconfig=../../KubernetesConfig/worker-${count.index}.kubeconfig" 
