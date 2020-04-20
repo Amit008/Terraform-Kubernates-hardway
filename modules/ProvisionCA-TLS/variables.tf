@@ -1,10 +1,10 @@
 
 variable "external_ip" {
-
+type    = "list"
 }
 
 variable "internal_ip" {
-
+type    = "list"
 }
 
 
