@@ -60,7 +60,7 @@ resource "null_resource" "Generate-Kubelet-Client-Certificates" {
   count=3
  depends_on       = ["null_resource.Generate-CA"]
   provisioner "local-exec" {
-  command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -hostname=worker-${count.index} -profile=kubernetes ../../JasonFiles/worker-${count.index}-csr.json | cfssljson -bare ../../JasonFiles/worker-${count.index}"
+  command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -hostname=worker-${count.index},element(${external_ip},{count.index}),element(${internal_ip},{count.index}) -profile=kubernetes ../../JasonFiles/worker-${count.index}-csr.json | cfssljson -bare ../../Certificate/worker-${count.index}"
  }
 }
 
