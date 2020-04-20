@@ -1,6 +1,7 @@
 
 variable "external_ip" {
 type    = "list"
+  default = ["0.0.0.0", "0.0.0.1", "0.0.0.2"]
 }
 
 variable "internal_ip" {
