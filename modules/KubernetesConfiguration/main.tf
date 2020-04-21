@@ -46,8 +46,7 @@ command = "kubectl config set-cluster kubernetes-the-hard-way --certificate-auth
 resource "null_resource" "Set-Scheduler-Credential" {
   # ...
 provisioner "local-exec" {
-command = "kubectl config set-credentials system:kube-scheduler --client-certificate=../../Certificate/kube-scheduler.pem --client-key=kube-../../Certificate/scheduler-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig
- "    }
+command = "kubectl config set-credentials system:kube-scheduler --client-certificate=../../Certificate/kube-scheduler.pem --client-key=kube-../../Certificate/scheduler-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig"    }
   
 }
 
@@ -55,9 +54,7 @@ command = "kubectl config set-credentials system:kube-scheduler --client-certifi
 resource "null_resource" "Set-kubeScheduler-Context" {
   # ...
 provisioner "local-exec" {
-command = "kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-scheduler --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig
-
- "    }
+command = "kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-scheduler --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig"    }
   
 }
 
