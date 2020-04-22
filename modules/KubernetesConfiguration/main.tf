@@ -24,7 +24,7 @@ command ="kubectl config set-credentials system:node:worker-${count.index} --cli
 
 resource "null_resource" "Set-Context" {
   # ...
-  depends_on       = ["null_resource.Configure-Cluster","null_resource.Set-Credentials-Cluster"]
+  depends_on       = ["null_resource.Set-Credentials-Cluster"]
 count=3
 provisioner "local-exec" {
 command ="kubectl config set-context default --cluster=kubernetes-the-hard-way  --user=system:node:worker-${count.index}  --kubeconfig=../../KubernetesConfig/worker-${count.index}.kubeconfig"
@@ -53,7 +53,7 @@ command ="kubectl config set-credentials system:kube-proxy --client-certificate=
 
 resource "null_resource" "Set-kube-proxy-Context" {
   # ...
-depends_on       = ["null_resource.Set-kube-proxy-Cluster"]
+depends_on       = ["null_resource.Set-kube-proxy-Credential"]
 provisioner "local-exec" {
 command ="kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-proxy --kubeconfig=../../KubernetesConfig/kube-proxy.kubeconfig"
   }
@@ -62,7 +62,7 @@ command ="kubectl config set-context default --cluster=kubernetes-the-hard-way -
 
 resource "null_resource" "Set-kube-proxy-UserContext" {
   # ...
-depends_on       = ["null_resource.Set-kube-proxy-Cluster","null_resource.Set-kube-proxy-Context"]
+depends_on       = ["null_resource.Set-kube-proxy-Context"]
 provisioner "local-exec" {
 command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-proxy.kubeconfig" 
   }
@@ -73,6 +73,7 @@ command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig
 
 resource "null_resource" "Set-kubeControllerManager-Cluster" {
   # ...
+  depends_on       = ["null_resource.Set-kube-proxy-UserContext"]
 provisioner "local-exec" {
 command ="kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://127.0.0.1:6443 --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"
   }
@@ -90,6 +91,7 @@ command ="kubectl config set-credentials system:kube-controller-manager --client
 
 resource "null_resource" "Set-kubeControllerManager-Context" {
   # ...
+  depends_on       = ["null_resource.Set-kubeControllerManager-Credential"]
 provisioner "local-exec" {
 command ="kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-controller-manager --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"
   }
@@ -98,6 +100,7 @@ command ="kubectl config set-context default --cluster=kubernetes-the-hard-way -
 
 resource "null_resource" "Set-kubeControllerManager-userContext" {
   # ...
+  depends_on       = ["null_resource.Set-kubeControllerManager-Context"]
 provisioner "local-exec" {
 command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"
   }
@@ -127,6 +130,7 @@ command ="kubectl config set-credentials system:kube-scheduler --client-certific
 
 resource "null_resource" "Set-kubeScheduler-Context" {
   # ...
+  depends_on       = ["null_resource.Set-Scheduler-Credential"]
 provisioner "local-exec" {
 command ="kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-scheduler --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig"
   }
@@ -136,7 +140,7 @@ command ="kubectl config set-context default --cluster=kubernetes-the-hard-way -
 
 resource "null_resource" "Set-kubeScheduler-User-Context" {
   # ...
-  depends_on       = ["null_resource.Set-Scheduler-Cluster","null_resource.Set-kubeScheduler-Context"]
+  depends_on       = ["null_resource.Set-kubeScheduler-Context"]
   provisioner "local-exec" {
     command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig" 
     }
@@ -164,7 +168,7 @@ resource "null_resource" "Set-kubeAdmin-Credential" {
 }
 resource "null_resource" "Set-kubeAdmin-Context" {
   # ...
-   depends_on       = ["null_resource.Set-kubeAdmin-Cluster"]
+   depends_on       = ["null_resource.Set-kubeAdmin-Credential"]
    provisioner "local-exec" {
     command ="kubectl config set-context default --cluster=kubernetes-the-hard-way --user=admin --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
     }
@@ -172,7 +176,7 @@ resource "null_resource" "Set-kubeAdmin-Context" {
 }
 resource "null_resource" "Set-kubeAdmin-User-Context" {
   # ...
-  depends_on       = ["null_resource.Set-kubeAdmin-Cluster"]
+  depends_on       = ["null_resource.Set-kubeAdmin-Context"]
    provisioner "local-exec" {
     command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
     }  
