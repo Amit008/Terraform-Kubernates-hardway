@@ -72,28 +72,29 @@ command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig
 resource "null_resource" "Set-kubeControllerManager-Cluster" {
   # ...
 provisioner "local-exec" {
-command = "kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://127.0.0.1:6443 --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
+command ="kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://127.0.0.1:6443 --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"
+  }
   
 }
 
 resource "null_resource" "Set-kubeControllerManager-Credential" {
   # ...
 provisioner "local-exec" {
-command = "kubectl config set-credentials system:kube-controller-manager --client-certificate=../../Certificate/kube-controller-manager.pem --client-key=../../Certificate/kube-controller-manager-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
+command ="kubectl config set-credentials system:kube-controller-manager --client-certificate=../../Certificate/kube-controller-manager.pem --client-key=../../Certificate/kube-controller-manager-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
   
 }
 
 resource "null_resource" "Set-kubeControllerManager-Context" {
   # ...
 provisioner "local-exec" {
-command = "kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-controller-manager --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
+command ="kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-controller-manager --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
   
 }
 
 resource "null_resource" "Set-kubeControllerManager-userContext" {
   # ...
 provisioner "local-exec" {
-command = "kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
+command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
   
 }
 
@@ -102,7 +103,7 @@ command = "kubectl config use-context default --kubeconfig=../../KubernetesConfi
 resource "null_resource" "Set-Scheduler-Cluster" {
   # ...
 provisioner "local-exec" {
-command = "kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://127.0.0.1:6443 --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig" 
+command ="kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://127.0.0.1:6443 --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig" 
     }
   
 }
@@ -110,7 +111,7 @@ command = "kubectl config set-cluster kubernetes-the-hard-way --certificate-auth
 resource "null_resource" "Set-Scheduler-Credential" {
   # ...
 provisioner "local-exec" {
-command = "kubectl config set-credentials system:kube-scheduler --client-certificate=../../Certificate/kube-scheduler.pem --client-key=kube-../../Certificate/scheduler-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig"    }
+command ="kubectl config set-credentials system:kube-scheduler --client-certificate=../../Certificate/kube-scheduler.pem --client-key=kube-../../Certificate/scheduler-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig"    }
   
 }
 
@@ -118,7 +119,7 @@ command = "kubectl config set-credentials system:kube-scheduler --client-certifi
 resource "null_resource" "Set-kubeScheduler-Context" {
   # ...
 provisioner "local-exec" {
-command = "kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-scheduler --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig"    }
+command ="kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-scheduler --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig"    }
   
 }
 
@@ -127,7 +128,7 @@ resource "null_resource" "Set-kubeScheduler-User-Context" {
   # ...
   #depends_on       = ["null_resource.Configure-Cluster","null_resource.Set-Credentials-Cluster","null_resource.Set-Context"]
   provisioner "local-exec" {
-    command = "kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig" 
+    command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig" 
     }
   
 }
@@ -138,28 +139,28 @@ resource "null_resource" "Set-kubeScheduler-User-Context" {
 resource "null_resource" "Set-kubeAdmin-Cluster" {
   # ...
    provisioner "local-exec" {
-    command = "kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://127.0.0.1:6443 --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
+    command ="kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://127.0.0.1:6443 --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
     }
   
 }
 resource "null_resource" "Set-kubeAdmin-Credential" {
   # ...
    provisioner "local-exec" {
-    command = "kubectl config set-credentials admin --client-certificate=admin.pem --client-key=admin-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
+    command ="kubectl config set-credentials admin --client-certificate=admin.pem --client-key=admin-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
     }
   
 }
 resource "null_resource" "Set-kubeAdmin-Context" {
   # ...
    provisioner "local-exec" {
-    command = "kubectl config set-context default  --cluster=kubernetes-the-hard-way --user=admin --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
+    command ="kubectl config set-context default --cluster=kubernetes-the-hard-way --user=admin --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
     }
   
 }
 resource "null_resource" "Set-kubeAdmin-User-Context" {
   # ...
    provisioner "local-exec" {
-    command = "kubectl config use-context default --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
+    command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
     }
   
 }
