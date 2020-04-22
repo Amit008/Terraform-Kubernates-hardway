@@ -1,4 +1,5 @@
 
+########-----------------------------The kubelet Kubernetes Configuration File-------------------##
 resource "null_resource" "Configure-Cluster" {
   # ...
   count =3
@@ -32,8 +33,69 @@ command = " kubectl config set-context default --cluster=kubernetes-the-hard-way
  
 }
 
+###--------------------------------------The kube-proxy Kubernetes Configuration File---------------------###
 
-###Kube Scheduler Config
+resource "null_resource" "Set-kube-proxy-Cluster" {
+  # ...
+provisioner "local-exec" {
+command = "kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=ca.pem --embed-certs=true --server=https://${KUBERNETES_PUBLIC_ADDRESS}:6443 --kubeconfig=kube-proxy.kubeconfig"  }
+   }
+
+resource "null_resource" "Set-kube-proxy-Credential" {
+  # ...
+
+provisioner "local-exec" {
+command = "kubectl config set-credentials system:kube-proxy  --client-certificate=kube-proxy.pem --client-key=kube-proxy-key.pem --embed-certs=true --kubeconfig=kube-proxy.kubeconfig"  }
+}
+
+resource "null_resource" "Set-kube-proxy-Context" {
+  # ...
+
+provisioner "local-exec" {
+command = "kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-proxy  --kubeconfig=kube-proxy.kubeconfig
+"  }
+}
+
+
+resource "null_resource" "Set-kube-proxy-UserContext" {
+  # ...
+
+provisioner "local-exec" {
+command = "kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig"  }
+}
+
+
+##---------------------------------------kubeControllerManager Configuration-----------------##
+
+resource "null_resource" "Set-kubeControllerManager-Cluster" {
+  # ...
+provisioner "local-exec" {
+command = "kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://127.0.0.1:6443 --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
+  
+}
+
+resource "null_resource" "Set-kubeControllerManager-Credential" {
+  # ...
+provisioner "local-exec" {
+command = "kubectl config set-credentials system:kube-controller-manager --client-certificate=../../Certificate/kube-controller-manager.pem --client-key=../../Certificate/kube-controller-manager-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
+  
+}
+
+resource "null_resource" "Set-kubeControllerManager-Context" {
+  # ...
+provisioner "local-exec" {
+command = "kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-controller-manager --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
+  
+}
+
+resource "null_resource" "Set-kubeControllerManager-userContext" {
+  # ...
+provisioner "local-exec" {
+command = "kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
+  
+}
+
+###--------------------------------------------Kube Scheduler Config-----------------------##
 
 resource "null_resource" "Set-Scheduler-Cluster" {
   # ...
@@ -67,7 +129,10 @@ resource "null_resource" "Set-kubeScheduler-User-Context" {
     }
   
 }
-  
+ 
+
+#####------------------------The admin Kubernetes Configuration File-----------------------####
+
 resource "null_resource" "Set-kubeAdmin-Cluster" {
   # ...
    provisioner "local-exec" {
@@ -96,13 +161,3 @@ resource "null_resource" "Set-kubeAdmin-User-Context" {
     }
   
 }
-
-
-
-
-
-
-
-
- 
- 
