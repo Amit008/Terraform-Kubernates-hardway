@@ -38,7 +38,7 @@ command = " kubectl config set-context default --cluster=kubernetes-the-hard-way
 resource "null_resource" "Set-kube-proxy-Cluster" {
   # ...
 provisioner "local-exec" {
-command = "kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://${KUBERNETES_PUBLIC_ADDRESS}:6443 --kubeconfig=kube-proxy.kubeconfig"  
+command = "kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://${var.KUBERNETES_PUBLIC_ADDRESS}:6443 --kubeconfig=kube-proxy.kubeconfig"  
   }
    }
 
