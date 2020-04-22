@@ -148,7 +148,7 @@ resource "null_resource" "Set-kubeScheduler-User-Context" {
 
 resource "null_resource" "Set-kubeAdmin-Cluster" {
   # ...
-  depends_on       = ["Set-kubeScheduler-User-Context"]
+  depends_on       = ["null_resource.Set-kubeScheduler-User-Context"]
    provisioner "local-exec" {
     command ="kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://127.0.0.1:6443 --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
     }
