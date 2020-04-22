@@ -44,7 +44,7 @@ command ="kubectl config set-cluster kubernetes-the-hard-way --certificate-autho
 
 resource "null_resource" "Set-kube-proxy-Credential" {
   # ...
-
+depends_on       = ["null_resource.Set-kube-proxy-Cluster"]
 provisioner "local-exec" {
 command ="kubectl config set-credentials system:kube-proxy --client-certificate=../../Certificate/kube-proxy.pem --client-key=../../Certificate/kube-proxy-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-proxy.kubeconfig"
   }
@@ -52,7 +52,7 @@ command ="kubectl config set-credentials system:kube-proxy --client-certificate=
 
 resource "null_resource" "Set-kube-proxy-Context" {
   # ...
-
+depends_on       = ["null_resource.Set-kube-proxy-Cluster"]
 provisioner "local-exec" {
 command ="kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-proxy --kubeconfig=../../KubernetesConfig/kube-proxy.kubeconfig"
   }
@@ -61,7 +61,7 @@ command ="kubectl config set-context default --cluster=kubernetes-the-hard-way -
 
 resource "null_resource" "Set-kube-proxy-UserContext" {
   # ...
-
+depends_on       = ["null_resource.Set-kube-proxy-Cluster"]
 provisioner "local-exec" {
 command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-proxy.kubeconfig" 
   }
