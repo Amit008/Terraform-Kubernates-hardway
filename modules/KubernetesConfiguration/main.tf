@@ -123,7 +123,8 @@ command ="kubectl config set-credentials system:kube-scheduler --client-certific
 resource "null_resource" "Set-kubeScheduler-Context" {
   # ...
 provisioner "local-exec" {
-command ="kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-scheduler --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig"    }
+command ="kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-scheduler --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig"
+  }
   
 }
 
