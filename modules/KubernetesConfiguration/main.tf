@@ -46,7 +46,7 @@ resource "null_resource" "Set-kube-proxy-Credential" {
   # ...
 
 provisioner "local-exec" {
-command = "kubectl config set-credentials system:kube-proxy  --client-certificate=kube-proxy.pem --client-key=kube-proxy-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-proxy.kubeconfig"  }
+command = "kubectl config set-credentials system:kube-proxy  --client-certificate=../../Certificate/kube-proxy.pem --client-key=../../Certificate/kube-proxy-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-proxy.kubeconfig"  }
 }
 
 resource "null_resource" "Set-kube-proxy-Context" {
