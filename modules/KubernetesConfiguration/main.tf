@@ -62,7 +62,8 @@ resource "null_resource" "Set-kube-proxy-UserContext" {
   # ...
 
 provisioner "local-exec" {
-command = "kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-proxy.kubeconfig"  }
+command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-proxy.kubeconfig" 
+  }
 }
 
 
