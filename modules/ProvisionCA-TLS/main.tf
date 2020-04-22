@@ -19,7 +19,7 @@ resource "null_resource" "Generate-Kube-Controller" {
   # ...
   depends_on       = ["null_resource.Generate-CA"]
   provisioner "local-exec" {
-    command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -profile=../../JasonFiles/kube-controller-manager-csr.json | cfssljson -bare ../../Certificate/kube-controller-manager"
+    command = "cfssl gencert -ca=../../Certificate/ca.pem -ca-key=../../Certificate/ca-key.pem -config=../../JasonFiles/ca-config.json -profile=kubernetes | cfssljson -bare ../../Certificate/kube-controller-manager"
    
   }
 }
