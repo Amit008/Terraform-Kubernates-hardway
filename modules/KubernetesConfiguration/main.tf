@@ -152,7 +152,7 @@ resource "null_resource" "Set-kubeAdmin-Cluster" {
 resource "null_resource" "Set-kubeAdmin-Credential" {
   # ...
    provisioner "local-exec" {
-    command ="kubectl config set-credentials admin --client-certificate=admin.pem --client-key=admin-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
+    command ="kubectl config set-credentials admin --client-certificate=../../Certificate/admin.pem --client-key=../../Certificate/admin-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
     }
   
 }
