@@ -114,7 +114,7 @@ command ="kubectl config set-cluster kubernetes-the-hard-way --certificate-autho
 
 resource "null_resource" "Set-Scheduler-Credential" {
   # ...
-  depends_on       = ["null_resource.Set-Schedule-Cluster"]
+  depends_on       = ["null_resource.Set-Scheduler-Cluster"]
 provisioner "local-exec" {
 command ="kubectl config set-credentials system:kube-scheduler --client-certificate=../../Certificate/kube-scheduler.pem --client-key=kube-../../Certificate/kube-scheduler-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-scheduler.kubeconfig"
   }
