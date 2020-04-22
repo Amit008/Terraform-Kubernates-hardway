@@ -96,7 +96,8 @@ command ="kubectl config set-context default --cluster=kubernetes-the-hard-way -
 resource "null_resource" "Set-kubeControllerManager-userContext" {
   # ...
 provisioner "local-exec" {
-command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"    }
+command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"
+  }
   
 }
 
