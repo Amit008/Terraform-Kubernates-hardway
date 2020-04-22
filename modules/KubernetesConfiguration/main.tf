@@ -166,6 +166,5 @@ resource "null_resource" "Set-kubeAdmin-User-Context" {
   # ...
    provisioner "local-exec" {
     command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
-    }
-  
+    }  
 }
