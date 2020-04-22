@@ -62,7 +62,7 @@ command ="kubectl config set-context default --cluster=kubernetes-the-hard-way -
 
 resource "null_resource" "Set-kube-proxy-UserContext" {
   # ...
-depends_on       = ["null_resource.Set-kube-proxy-Cluster"]
+depends_on       = ["null_resource.Set-kube-proxy-Cluster","Set-kube-proxy-Context"]
 provisioner "local-exec" {
 command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/kube-proxy.kubeconfig" 
   }
