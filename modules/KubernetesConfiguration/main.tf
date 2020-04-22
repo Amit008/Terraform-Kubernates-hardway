@@ -80,7 +80,7 @@ command ="kubectl config set-cluster kubernetes-the-hard-way --certificate-autho
 
 resource "null_resource" "Set-kubeControllerManager-Credential" {
   # ...
-  depends_on       = ["Set-kubeControllerManager-Cluster"]
+  depends_on       = ["null_resource.Set-kubeControllerManager-Cluster"]
 provisioner "local-exec" {
 command ="kubectl config set-credentials system:kube-controller-manager --client-certificate=../../Certificate/kube-controller-manager.pem --client-key=../../Certificate/kube-controller-manager-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/kube-controller-manager.kubeconfig"
   }
