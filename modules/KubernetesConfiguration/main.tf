@@ -52,8 +52,7 @@ resource "null_resource" "Set-kube-proxy-Context" {
   # ...
 
 provisioner "local-exec" {
-command = "kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-proxy  --kubeconfig=kube-proxy.kubeconfig
-"  }
+command = "kubectl config set-context default --cluster=kubernetes-the-hard-way --user=system:kube-proxy  --kubeconfig=kube-proxy.kubeconfig"  }
 }
 
 
