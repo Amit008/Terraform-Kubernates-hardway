@@ -1,6 +1,6 @@
 
 ########-----------------------------The kubelet Kubernetes Configuration File-------------------##
-resource "null_resource" "The kubelet Kubernetes Configuration File" {
+resource "null_resource" "The-kubelet-Kubernetes-Configuration-File" {
   # ...
   count =3
   provisioner "local-exec" {
