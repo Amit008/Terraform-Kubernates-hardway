@@ -150,34 +150,23 @@ resource "null_resource" "Set-kubeScheduler-User-Context" {
 
 #####------------------------The admin Kubernetes Configuration File-----------------------####
 
-resource "null_resource" "Set-kubeAdmin-Cluster" {
-  # ...
-  depends_on       = ["null_resource.Set-kubeScheduler-User-Context"]
+resource "null_resource" "The-admin-Kubernetes-Configuration-File" {
+
    provisioner "local-exec" {
     command ="kubectl config set-cluster kubernetes-the-hard-way --certificate-authority=../../Certificate/ca.pem --embed-certs=true --server=https://127.0.0.1:6443 --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
-    }
-  
-}
-resource "null_resource" "Set-kubeAdmin-Credential" {
-  # ...
-   depends_on       = ["null_resource.Set-kubeAdmin-Cluster"]
+    }  
+   
    provisioner "local-exec" {
     command ="kubectl config set-credentials admin --client-certificate=../../Certificate/admin.pem --client-key=../../Certificate/admin-key.pem --embed-certs=true --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
     }
-  
-}
-resource "null_resource" "Set-kubeAdmin-Context" {
-  # ...
-   depends_on       = ["null_resource.Set-kubeAdmin-Credential"]
+
    provisioner "local-exec" {
     command ="kubectl config set-context default --cluster=kubernetes-the-hard-way --user=admin --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
     }
   
-}
-resource "null_resource" "Set-kubeAdmin-User-Context" {
-  # ...
-  depends_on       = ["null_resource.Set-kubeAdmin-Context"]
+  
    provisioner "local-exec" {
     command ="kubectl config use-context default --kubeconfig=../../KubernetesConfig/admin.kubeconfig" 
     }  
+
 }
